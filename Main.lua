@@ -31,13 +31,11 @@ text.TextSize = 35
 text.TextTransparency = 1
 text.Parent = frame
 
--- Windows Startup Sound Logic (Vol 50%)
 local sound = Instance.new("Sound")
-sound.SoundId = "rbxassetid://156353900" -- Windows XP/7 Style Startup Sound
+sound.SoundId = "rbxassetid://156353900" 
 sound.Volume = 0.5
 sound.Parent = frame
 
--- Animation & Sound Execution
 task.spawn(function()
     sound:Play()
     tweenService:Create(frame, TweenInfo.new(0.5), {BackgroundTransparency = 0.3}):Play()
@@ -49,17 +47,11 @@ task.spawn(function()
     screenGui:Destroy()
 end)
 
--- [[ ORIGINAL OVERRIDE SETTINGS ]]
-settings().Rendering.QualityLevel = 1
-lighting.GlobalShadows = false
-lighting.Brightness = 0
-lighting.FogEnd = 9e9
-
+-- [[ OPTIMIZED CLEANUP LOGIC ]]
 local function forceClean(v)
     if v:IsA("ParticleEmitter") or v:IsA("Trail") or v:IsA("Beam") or v:IsA("Explosion") then
         v.Enabled = false
         v.Lifetime = NumberRange.new(0)
-        v.Transparency = NumberSequence.new(1)
     end
 
     if v:IsA("BasePart") or v:IsA("MeshPart") then
@@ -67,6 +59,7 @@ local function forceClean(v)
         v.Material = Enum.Material.SmoothPlastic
         v.Reflectance = 0
         
+        -- Textures
         for _, child in pairs(v:GetChildren()) do
             if child:IsA("Decal") or child:IsA("Texture") then
                 child:Destroy()
@@ -90,24 +83,25 @@ local function forceClean(v)
     end
 end
 
-task.spawn(function()
-    while task.wait(1) do
-        for _, v in pairs(workspace:GetDescendants()) do
-            if v:IsA("BasePart") or v:IsA("ParticleEmitter") then
-                forceClean(v)
-            end
-        end
-    end
-end)
+-- 1. Initial Scan (Run only ONCE to prevent lag)
+for _, v in pairs(workspace:GetDescendants()) do
+    forceClean(v)
+end
 
+-- 2. Fast Response (Watch for new items ONLY)
 workspace.DescendantAdded:Connect(function(v)
     forceClean(v)
 end)
 
+-- 3. Lighting Fix
+settings().Rendering.QualityLevel = 1
+lighting.GlobalShadows = false
+lighting.Brightness = 0
+lighting.FogEnd = 9e9
 for _, v in pairs(lighting:GetChildren()) do
     if v:IsA("PostEffect") or v:IsA("BloomSize") or v:IsA("BlurEffect") then
         v.Enabled = false
     end
 end
 
-print("Override Edition Loaded - Nakamura Custom with Sound")
+print("Override Edition Loaded - Nakamura Custom (Lag-Free)")
