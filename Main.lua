@@ -4,7 +4,7 @@ local _0x5=_0x1.LocalPlayer;local _0x6=_0x5:WaitForChild("\80\108\97\121\101\114
 local _0x7=Instance.new("\83\99\114\101\101\110\71\117\105")_0x7.IgnoreGuiInset=true;_0x7.Parent=_0x6
 local _0x8=Instance.new("\70\114\97\109\101")_0x8.Size=UDim2.new(1,0,1,0)_0x8.BackgroundColor3=Color3.new(0,0,0)_0x8.BackgroundTransparency=1;_0x8.Parent=_0x7
 local _0x9=Instance.new("\84\101\120\116\76\97\98\101\108")_0x9.Size=UDim2.new(1,0,0.2,0)_0x9.Position=UDim2.new(0,0,0.4,0)_0x9.BackgroundTransparency=1;_0x9.TextColor3=Color3.new(1,1,1)
-_0x9.Text="速度6.8か6.9がマックス" _0x9.Font=Enum.Font.Code;_0x9.TextSize=35;_0x9.TextTransparency=1;_0x9.Parent=_0x8
+_0x9.Text="上下に飛べなくなったらfly2回押してね（修正中）" _0x9.Font=Enum.Font.Code;_0x9.TextSize=35;_0x9.TextTransparency=1;_0x9.Parent=_0x8
 local _0xA=Instance.new("\83\111\117\110\100")_0xA.SoundId="rbxassetid://156353900";_0xA.Volume=0.5;_0xA.Parent=_0x8
 task.spawn(function()pcall(function()_0xA:Play()end)_0x2:Create(_0x8,TweenInfo.new(0.3),{BackgroundTransparency=0.4}):Play()_0x2:Create(_0x9,TweenInfo.new(0.5),{TextTransparency=0}):Play()task.wait(1.5)_0x2:Create(_0x9,TweenInfo.new(0.5),{TextTransparency=1}):Play()_0x2:Create(_0x8,TweenInfo.new(0.3),{BackgroundTransparency=1}):Play()task.wait(0.5)_0x7:Destroy()end)
 local function _0xB(_0xC)
